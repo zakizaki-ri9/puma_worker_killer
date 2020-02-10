@@ -10,4 +10,5 @@ jobs:
       - name: Check that CHANGELOG is touched
         run: |
           cat $GITHUB_EVENT_PATH
-          cat $GITHUB_EVENT_PATH | jq .pull_request.title |  grep -i '\[\(\(changelog skip\)\|\(ci skip\)\)\]' ||  git diff remotes/origin/${{ github.base_ref }} --name-only | grep CHANGELOG.md
+          git diff remotes/origin/${{ github.base_ref }} --name-only
+          cat $GITHUB_EVENT_PATH | jq .pull_request.title | grep -i '\[\(\(changelog skip\)\|\(ci skip\)\)\]' ||  git diff remotes/origin/${{ github.base_ref }} --name-only | grep CHANGELOG.md
